@@ -15,7 +15,7 @@ void printFoods(string*, const unsigned);
  * Description:
  * Starting point of the program. Creates a dynamic array of strings. User gets
  * to specify their desired size. Calls functions. Releases dynamic memory.
- * 
+ *
  * Input:
  * N/A
  *
@@ -25,7 +25,7 @@ void printFoods(string*, const unsigned);
 
 int main() {
     // variables
-    string*  dynArr   = nullptr;
+    string* dynArr = nullptr;
     unsigned userSize = 0;
 
     // get the size for the array from user
@@ -36,12 +36,15 @@ int main() {
     } while (userSize > 10);
 
     // TODO: create the dynamic memory
+    dynArr = new string[userSize];
 
     // call the functions
     populate(dynArr, userSize);
     printFoods(dynArr, userSize);
 
     // TODO: release the dynamic memory to avoid a memory leak
+    delete[] dynArr;
+    dynArr = nullptr;
 
     // terminate
     return 0;
@@ -50,7 +53,7 @@ int main() {
 /*******************************************************************************
  * Description:
  * Gets data from the user to populate the array pointed to by `arrPtr`.
- * 
+ *
  * Input:
  * arrPtr   - a pointer to the beginning of a string array
  * ARR_SIZE - a constant unsigned integer containing the size of the array
@@ -61,6 +64,13 @@ int main() {
 *******************************************************************************/
 
 void populate(string* arrPtr, const unsigned ARR_SIZE) {
+
+    for (unsigned x = 0; x < ARR_SIZE; x++) {
+        cout << "enter food order #" << x + 1 << ":";
+        cin >> arrPtr[x];
+
+
+    }
     // TODO
 }
 
@@ -68,7 +78,7 @@ void populate(string* arrPtr, const unsigned ARR_SIZE) {
  * Description:
  * Displays the information stored in the array pointed to by `arrPtr`. Also
  * prints what memory address each element is stored in.
- * 
+ *
  * Input:
  * arrPtr   - a pointer to the beginning of a string array
  * ARR_SIZE - a constant unsigned integer containing the size of the array
@@ -79,5 +89,11 @@ void populate(string* arrPtr, const unsigned ARR_SIZE) {
 *******************************************************************************/
 
 void printFoods(string* arrPtr, const unsigned ARR_SIZE) {
+    for (unsigned x = 0; x < ARR_SIZE; x++) {
+        cout << "food order #" << x + 1 << ":\n";
+        cout << arrPtr[x] << endl;
+        cout << "(sent from address " << arrPtr + x << ")\n";
+
+    }
     // TODO
 }
